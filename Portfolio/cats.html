@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="jumbotron text-center">
+    <style>
+        img {
+            width: 40%;
+            height: 50%;
+        }
+        ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5%;
+        background-color: rgba(86, 186, 183, 0.5);
+        margin: 0 20%;
+        list-style-type: none;
+        }
+
+        li {
+            padding: 0.3% 1%;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li:hover {
+            background-color: rgb(44, 125, 123);
+        }        
+
+        .active {
+            background-color: rgb(44, 125, 123);
+        }
+    </style>
+    <nav>
+        <ul>
+            <li><a href="./index.html">About me</a></li>
+            <li class="active"><a href="./cats.html">Cats</a></li>
+            <li><a href="./DC.html">Time and Date</a></li>
+            <li><a href="./weather.html">Weather</a></li>
+            <li><a href="https://github.com/AntonsPashko12/portfolio-nr2" target="_blank">Github</a></li>
+        </ul>
+    </nav>
+
+    <button class="btn btn-primary my-2 generate_btn">Generate</button>
+
+    
+    <div class="catsImgDiv">
+    </div>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script>
+                
+            let generate_btn = document.querySelector(".generate_btn");
+
+            generate_btn.addEventListener("click", fetchPics);
+
+        function fetchPics() {
+            let catsImgDiv = document.querySelector(".catsImgDiv");
+            catsImgDiv.innerHTML = '';
+
+            fetch('https://api.thecatapi.com/v1/images/search?api_key=8a7f5230-ef05-484b-8691-bf5cde4a4656')
+            .then(response => response.json())
+            .then((data) => {
+                let catsImgUrl = data[0].url
+
+                let catsImgEl = document.createElement("img")
+                catsImgEl.setAttribute('src', `${catsImgUrl}`)
+
+                let catsImgDiv = document.querySelector(".catsImgDiv")
+                catsImgDiv.appendChild(catsImgEl)
+            })
+            .catch(err => console.log(err))
+        }
+    </script>
+
+</body>
+</html>

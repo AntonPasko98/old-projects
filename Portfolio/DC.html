@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="./index.html">About me</a></li>
+            <li><a href="./cats.html">Cats</a></li>
+            <li class="active"><a href="./DC.html">Time and Date</a></li>
+            <li><a href="./weather.html">Weather</a></li>
+            <li><a href="https://github.com/AntonsPashko12/portfolio-nr2" target="_blank">Github</a></li>
+        </ul>
+    </nav>
+
+    <canvas id="canvas" width="250%" height="90%">
+    </canvas>
+    <br><br>
+    <canvas id="canvas2" width="290%" height="200%">
+    </canvas>
+    
+    <style>
+        body {
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid gray;
+            border-radius: 3%;
+            box-shadow: 8px 10px 5px #1f2124;
+            margin: 0%;
+            background-color: #060729;
+        }
+        #canvas2 {
+            background-color: gray;
+        }
+        ul {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5%;
+            background-color: rgba(86, 186, 183, 0.5);
+            margin: 0 20%;
+            list-style-type: none;
+        }
+
+        li {
+            padding: 0.3% 1%;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li:hover {
+            background-color: rgb(44, 125, 123);
+        }        
+
+        .active {
+            background-color: rgb(44, 125, 123);
+        }
+    </style>
+
+    <script>
+         window.onload = function() 
+        {
+            digitalClock();
+            date();
+        }
+        function digitalClock() {
+            var datum = new Date();
+            
+            var str = ("0" + datum.getHours()).slice(-2) + ":" + ("0" + datum.getMinutes()).slice(-2) + ":" + ("0" + datum.getSeconds()).slice(-2);
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            
+            ctx.clearRect(0, 0, 1000, 1000);  
+            ctx.font = "60px Roboto";
+            ctx.fillStyle = "#31a811";
+            ctx.fillText(str, 8, 65);
+            
+            setInterval(digitalClock, 1);
+        }
+        function date() {
+            var datu = new Date();
+            
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            
+            var atr = ("0" + datu.getDate()).slice(-2) + "." + ("0" + (datu.getMonth() + 1)).slice(-2) + "." + datu.getFullYear();
+            var datums = weekday[datu.getDay()];
+
+            var canvas2 = document.getElementById("canvas2");
+            var ctx = canvas2.getContext("2d");
+            
+            ctx.font = "50px Roboto";
+            ctx.fillStyle = "#9fc9ba";
+            ctx.fillText(atr, 25, 80);
+            ctx.fillText(datums, 40, 160);
+        }
+        </script>
+</body>
+</html>
